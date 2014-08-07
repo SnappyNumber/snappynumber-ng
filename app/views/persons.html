@@ -1,0 +1,22 @@
+<ul>
+  <li ng-repeat="(personId, person) in persons">
+    {{ person.surname }}, {{ person.forename }}
+    <a ng-click="deletePerson(personId)">delete</a>
+  </li>
+</ul>
+
+<form ng-submit="submitPerson()">
+  <input type="text" ng-model="person.title" />
+  <input type="text" ng-model="person.forename" />
+  <input type="text" ng-model="person.surname" />
+  <input type="text" ng-model="person.email" />
+  <input type="text" ng-model="person.mobile" />
+  <input type="submit" value="Add Person" />
+</form>
+<hr />
+<h2>Debug Info</h2>
+Persons:<br />
+<pre>{{ persons | json }}</pre>
+
+Person:<br />
+<pre>{{ person | json }}</pre>
