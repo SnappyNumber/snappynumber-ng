@@ -8,7 +8,7 @@ app.controller('PersonsCtrl', function ($scope, Person) {
       $scope.person = { title: '', forename: '', surname: '', email: '', mobile: '' };;
     });
   };
-  $scope.deletePerson = function (personId) {
-    Person.delete(personId);
+  $scope.deletePerson = function (person) {
+    Person.delete(person);
   };
 });

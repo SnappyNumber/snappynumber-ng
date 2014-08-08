@@ -1,35 +1,20 @@
 <div class="col-lg-6">
   <ul>
-    <li ng-repeat="(personId, person) in persons | orderBy: 'surname'">
+    <li ng-repeat="person in persons | orderBy: 'surname'">
       {{ person.surname }}, {{ person.forename }}
-      <a ng-click="deletePerson(personId)">delete</a>
+      <a ng-click="deletePerson(person)"><span class="glyphicon glyphicon-remove"></span></a>
     </li>
   </ul>
 </div>
 
 <div class="col-lg-6">
   <form ng-submit="submitPerson()">
-    <dl>
-
-      <dt>title</dt>
-      <dd><input type="text" ng-model="person.title" /></dd>
-      
-      <dt>forename</dt>
-      <dd><input type="text" ng-model="person.forename" /></dd>
-      
-      <dt>surname</dt>
-      <dd><input type="text" ng-model="person.surname" /></dd>
-      
-      <dt>email</dt>
-      <dd><input type="text" ng-model="person.email" /></dd>
-      
-      <dt>mobile</dt>
-      <dd><input type="text" ng-model="person.mobile" /></dd>
-      
-      <dd><input type="submit" value="Add Person" /></dd>
-
-    </dl>
-    
+    <input type="text" ng-model="person.title" placeholder="title" />
+    <input type="text" ng-model="person.forename" placeholder="forename" />
+    <input type="text" ng-model="person.surname" placeholder="surname" />
+    <input type="text" ng-model="person.email" placeholder="email" />
+    <input type="text" ng-model="person.mobile" placeholder="mobile" />
+    <input type="submit" value="Add Person" />
   </form>
 </div>
 
