@@ -82,14 +82,23 @@
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+        <!-- other -->
+        <script src="//maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false&amp;language=en"></script>
+        <!-- endother -->
+
         <script src="scripts/app.js"></script>
+        <script src="scripts/services/google.js"></script>
         <script src="scripts/services/person.js"></script>
         <script src="scripts/controllers/persons.js"></script>
         <script src="scripts/controllers/about.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>

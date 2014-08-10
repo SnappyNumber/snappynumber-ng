@@ -2,7 +2,7 @@
 
 app.factory('Person',
   function ($firebase, FIREBASE_URL) {
-    var ref = new Firebase(FIREBASE_URL + persons);
+    var ref = new Firebase(FIREBASE_URL + 'persons');
     var persons = $firebase(ref).$asArray();
     var Person = {
       all: persons,

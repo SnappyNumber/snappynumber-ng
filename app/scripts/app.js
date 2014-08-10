@@ -18,6 +18,7 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ngStorage',
     'firebase'
   ]);
 
