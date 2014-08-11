@@ -5,7 +5,10 @@ app.controller('PersonsCtrl', function ($scope, Person, Google) {
   $scope.person = { title: '', forename: '', surname: '', email: '', mobile: '' };
   $scope.submitPerson = function () {
     Google.geocode($scope.person.postcode).then(function (location) {
-      $scope.person.loc = location;
+      $scope.person.location = {
+        latitude: location.lat,
+        longitude: location.lng
+      };
       Person.create($scope.person).then(function () {
         $scope.person = { title: '', forename: '', surname: '', email: '', mobile: '' };
       });
