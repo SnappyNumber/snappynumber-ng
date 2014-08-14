@@ -2,7 +2,14 @@
 
 app.controller('PersonsCtrl', function ($scope, Person, Google) {
   $scope.persons = Person.all;
-  $scope.person = { title: '', forename: '', surname: '', email: '', mobile: '' };
+  $scope.person = {
+    title: '',
+    forename: '',
+    surname: '',
+    email: '',
+    mobile: '',
+    postcode: ''
+  };
   $scope.submitPerson = function () {
     Google.geocode($scope.person.postcode).then(function (location) {
       $scope.person.location = {
@@ -10,7 +17,14 @@ app.controller('PersonsCtrl', function ($scope, Person, Google) {
         longitude: location.lng
       };
       Person.create($scope.person).then(function () {
-        $scope.person = { title: '', forename: '', surname: '', email: '', mobile: '' };
+        $scope.person = {
+          title: '',
+          forename: '',
+          surname: '',
+          email: '',
+          mobile: '',
+          postcode: ''
+        };
       });
     });
   };

@@ -22,19 +22,4 @@ var app = angular
     'firebase'
   ]);
 
-app.config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/persons.html',
-        controller: 'PersonsCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
-
 app.constant('FIREBASE_URL', 'https://snappynumber.firebaseio.com/');

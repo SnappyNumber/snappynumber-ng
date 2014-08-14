@@ -1,0 +1,12 @@
+
+<div class="col-lg-6">
+  <input type="search" ng-model="query" placeholder="Search...">
+</div>
+
+<div class="col-lg-6">
+  <ul>
+    <li ng-repeat="person in persons | filter:filterBySearch">
+      {{ person.surname }}, {{ person.forename }}
+    </li>
+  </ul>
+</div>
