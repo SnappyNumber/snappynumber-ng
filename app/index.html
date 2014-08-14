@@ -45,7 +45,7 @@
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
+       ga('create', 'UA-53816524-1');
        ga('send', 'pageview');
     </script>
 
@@ -55,6 +55,10 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
     <!-- endbuild -->
+
+    <!-- external -->
+    <script src="//maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false&amp;language=en&amp;callback=onGoogleApiReady"></script>
+    <!-- endexternal -->
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -84,12 +88,10 @@
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/angular-ui-map/ui-map.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
-    <!-- external -->
-    <script src="//maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false&amp;language=en"></script>
-    <!-- endexternal -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>

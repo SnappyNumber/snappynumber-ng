@@ -1,12 +1,24 @@
 
-<div class="col-lg-6">
+<div class="col-lg-3">
   <input type="search" ng-model="query" placeholder="Search...">
-</div>
-
-<div class="col-lg-6">
-  <ul>
-    <li ng-repeat="person in persons | filter:filterBySearch">
-      {{ person.surname }}, {{ person.forename }}
+  <ul class="search-results">
+    <li ng-repeat="marker in markers" ui-map-marker="markers[$index]" ui-event="{'map-click': 'panTo(marker)'}">
+      <a ng-click="panTo(marker)">{{marker.person.forename}} {{marker.person.surname}}</a>
     </li>
   </ul>
+</div>
+
+<div class="col-lg-9">
+  <section id="map">
+    <div id="map_canvas" ui-map="searchMap" class="map" style="height: 600px; width: 100%;" ui-options="mapOptions"></div>
+  </section>
+</div>
+
+<div ng-repeat="person in persons | filter:filterBySearch"></div>
+
+<div ui-map-info-window="infoWindow">
+  <strong>{{currentMarker.person.forename}} {{currentMarker.person.surname}}</strong><br />
+  <span class="glyphicon glyphicon-earphone"></span> {{currentMarker.person.mobile}}<br />
+  <span class="glyphicon glyphicon-inbox"></span>
+  <a href="mailto:{{currentMarker.person.email}}">{{currentMarker.person.email}}</a>
 </div>
