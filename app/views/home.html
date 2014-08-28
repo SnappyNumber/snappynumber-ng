@@ -5,24 +5,20 @@
   <input type="search" ng-model="query" placeholder="Search...">
 </div>
 
-<div class="col-lg-5">
-  <span ng-hide="currentPerson">&nbsp;</span>
-  <div ng-show="currentPerson" class="ng-hide">
-    <strong>{{currentPerson.forename}} {{currentPerson.surname}}</strong><br />
-    <span class="glyphicon glyphicon-earphone"></span> {{currentPerson.mobile}}<br />
-    <span class="glyphicon glyphicon-inbox"></span>
-    <a href="mailto:{{currentMarker.person.email}}">{{currentPerson.email}}</a>
-  </div>
-</div>
-
 <div class="clearfix"></div>
 
-<div class="col-lg-9">
-  <ul class="search-results">
-    <li ng-repeat="person in persons | filter:filterBySearch">
-      <a ng-click="panTo(person)">{{person.forename}} {{person.surname}}</a><br />
-    </li>
-  </ul>
+<div>
+  <dl class="search-results">
+    <dt ng-repeat-start="person in persons | filter:filterBySearch">
+      {{person.forename}} {{person.surname}}
+    </dt>
+    <dd ng-repeat-end>
+      <span class="glyphicon glyphicon-earphone"></span> {{person.mobile}}
+      <span class="glyphicon glyphicon-inbox"></span>
+      <a href="mailto:{{currentMarker.person.email}}">{{person.email}}</a>,
+      {{person.postcode | postalTown}}, {{person.postcode | postcodePartial}}
+    </dd>
+  </dl>
 </div>
 
 <div class="clearfix"></div>
