@@ -9,11 +9,8 @@ app.controller('HomeCtrl', function ($scope, Person) {
     regex = new RegExp('\\b' + value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'i');
   });
   $scope.filterBySearch = function(person) {
-      return ($scope.query
-        && $scope.query.length >= 2
-        && regex.test(person.forename + ' ' + person.surname));
-  };
-  $scope.panTo = function(person) {
-    $scope.currentPerson = person;
+    return ($scope.query
+      && $scope.query.length >= 2
+      && regex.test(person.forename + ' ' + person.surname));
   };
 });
