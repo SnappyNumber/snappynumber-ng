@@ -22,11 +22,7 @@
     <!-- Add your site or application content here -->
     <div class="container">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
-        </ul>
+        <div ng-include="'views/nav.html'"></div>
         <h3 class="text-muted">Snappy Number</h3>
       </div>
 
@@ -95,8 +91,10 @@
         <script src="scripts/routes.js"></script>
         <script src="scripts/filters.js"></script>
         <script src="scripts/services/search.js"></script>
+        <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/google.js"></script>
         <script src="scripts/services/person.js"></script>
+        <script src="scripts/controllers/auth.js"></script>
         <script src="scripts/controllers/home.js"></script>
         <script src="scripts/controllers/persons.js"></script>
         <script src="scripts/controllers/about.js"></script>

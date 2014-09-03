@@ -1,0 +1,11 @@
+<ul class="nav nav-pills pull-right">
+  <li class="active">
+    <a ng-href="#">Home</a>
+  </li>
+  <li ng-show="signedIn()">
+    <a href="#" ng-click="logout()">log out</a>
+  </li>
+  <li ng-show="!signedIn()">
+    <a ng-href="#/login">log in</a>
+  </li>
+</ul>
