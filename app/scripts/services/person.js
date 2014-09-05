@@ -1,7 +1,7 @@
 'use strict';
 
 app.factory('Person',
-  function ($firebase, FIREBASE_URL) {
+  function ($firebase, FIREBASE_URL, $q) {
     var ref = new Firebase(FIREBASE_URL + 'persons');
     var persons = $firebase(ref).$asArray();
     var Person = {
@@ -9,8 +9,12 @@ app.factory('Person',
       create: function (person) {
         return persons.$add(person);
       },
-      find: function (personId) {
-        return persons.$child(personId);
+      get: function (id) {
+        var deferred = $q.defer();
+        ref.child(id).once('value', function(snap) {
+          deferred.resolve(snap.val());
+        });
+        return deferred.promise;
       },
       delete: function (personId) {
         return persons.$remove(personId);

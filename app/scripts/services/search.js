@@ -29,9 +29,7 @@ app.factory('Search',
             deferred.resolve(searchResults);
             snap.ref().off('value', fn);
             snap.ref().remove();
-            requestRef.child(requestId).remove();
-          } else {
-            deferred.reject('failed: ' + requestId);
+            //requestRef.child(requestId).remove();
           }
         });
         return deferred.promise;

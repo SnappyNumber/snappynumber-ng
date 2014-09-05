@@ -11,9 +11,8 @@
 <div class="clearfix"></div>
 
 <div>
-  {{ results }}
   <dl class="search-results">
-    <dt ng-repeat-start="person in persons | filter:filterBySearch">
+    <dt ng-repeat-start="person in results">
       {{person.forename}} {{person.surname}}
     </dt>
     <dd ng-repeat-end>
