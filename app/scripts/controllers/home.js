@@ -1,15 +1,26 @@
 'use strict';
 
 app.controller('HomeCtrl', function ($scope, Search, Person) {
+  $scope.searching = false;
+  $scope.noResults = false;
   $scope.results = [];
   $scope.search = function(term) {
+    $scope.results = [];
+    $scope.searching = true;
+    $scope.noResults = false;
     var queryId = Search.query(term);
     Search.results(queryId).then(function(results) {
-      results.forEach(function(result) {
-        Person.get(result._id).then(function(person){
-          $scope.results.push(person);
+      if (typeof results != 'undefined'){
+        results.forEach(function(result) {
+          Person.get(result._id).then(function(person){
+            person.score = result._score;
+            $scope.results.push(person);
+          });
         });
-      });
+      } else {
+        $scope.noResults = true;
+      }
+      $scope.searching = false;
     });
   };
 });

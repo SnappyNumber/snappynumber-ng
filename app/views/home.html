@@ -3,7 +3,7 @@
 
 <div class="col-lg-4">
   <form novalidate class="simple-form">
-    <input type="search" ng-model="term" placeholder="Search...">
+    <input type="search" ng-model="term" ng-change="noResults = false" placeholder="Search..." />
     <button ng-click="search(term)">go</button>
   </form>
 </div>
@@ -11,9 +11,15 @@
 <div class="clearfix"></div>
 
 <div>
-  <dl class="search-results">
+  <span ng-hide="!searching">
+    <i class="fa fa-spinner fa-spin"></i>
+  </span>
+  <span ng-show="noResults">
+    no results found for search term '{{term}}'
+  </span>
+  <dl class="search-results" ng-show="results.length > 0">
     <dt ng-repeat-start="person in results">
-      {{person.forename}} {{person.surname}}
+      {{person.score}} {{person.forename}} {{person.surname}}
     </dt>
     <dd ng-repeat-end>
       <span class="glyphicon glyphicon-earphone"></span> {{person.mobile}}

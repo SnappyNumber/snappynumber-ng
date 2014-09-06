@@ -6,8 +6,6 @@ app.factory('Search',
     var requestRef = searchRef.child("request");
     var responseRef = searchRef.child("response");
     var Search = {
-      //allRequests: requests,
-      //allResponses: responses,
       query: function (term) {
         var request = {
           index: 'sn-persons',
@@ -25,11 +23,9 @@ app.factory('Search',
         var deferred = $q.defer();
         responseRef.child(requestId).on('value', function fn(snap) {
           if(snap.val() !== null) {
-            var searchResults = snap.val().hits;
-            deferred.resolve(searchResults);
+            deferred.resolve(snap.val().hits);
             snap.ref().off('value', fn);
             snap.ref().remove();
-            //requestRef.child(requestId).remove();
           }
         });
         return deferred.promise;
