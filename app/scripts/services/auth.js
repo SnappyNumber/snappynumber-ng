@@ -1,12 +1,13 @@
 'use strict';
 
 app.factory('Auth',
-  function ($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
+  function ($firebaseSimpleLogin, FIREBASE_URL) {
     var ref = new Firebase(FIREBASE_URL);
-
     var auth = $firebaseSimpleLogin(ref);
-    
-    var Auth = {
+    return {
+      user: function () {
+        return auth.user;
+      },
       register: function (user) {
         return auth.$createUser(user.email, user.password);
       },
@@ -20,10 +21,5 @@ app.factory('Auth',
         auth.$logout();
       }
     };
-
-    $rootScope.signedIn = function () {
-      return Auth.signedIn();
-    };
-
-    return Auth;
-  })
+  }
+);

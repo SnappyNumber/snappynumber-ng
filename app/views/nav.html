@@ -3,9 +3,9 @@
     <a ng-href="#">Home</a>
   </li>
   <li ng-show="signedIn()">
-    <a href="#" ng-click="logout()">log out</a>
+    <a href="#" ng-click="signOut()">log out {{ user().email }}</a>
   </li>
-  <li ng-show="!signedIn()">
+  <li ng-hide="signedIn()">
     <a ng-href="#/login">log in</a>
   </li>
 </ul>
