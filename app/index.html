@@ -87,10 +87,15 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+        <!-- other -->
+        <script src="//maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false&amp;language=en&amp;callback=onGoogleApiReady"></script>
+        <!-- endother -->
+
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/routes.js"></script>
         <script src="scripts/filters.js"></script>
+        <script src="scripts/directives.js"></script>
         <script src="scripts/services/search.js"></script>
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/google.js"></script>

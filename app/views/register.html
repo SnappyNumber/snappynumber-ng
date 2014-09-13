@@ -1,12 +1,70 @@
-<div class="auth-forms">
+<div class="container-fluid">
+  <form ng-submit="register()" name="registration" novalidate>
+    <div class="row">
+      <p ng-show="error" class="text-danger">
+        {{ error }}
+      </p>
+    </div>
 
-  <h2>Register</h2>
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.forename.$invalid && !registration.forename.$pristine }">
+        <label for="forename">first name</label>
+        <input type="text" name="forename" ng-model="person.forename" class="form-control" ng-minlength="1" required />
+        <p ng-show="registration.forename.$invalid && !registration.forename.$pristine" class="help-block">
+          Please enter your first name (given name(s)).
+        </p>
+      </div>
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.surname.$invalid && !registration.surname.$pristine }">
+        <label for="surname">last name</label>
+        <input type="text" name="surname" ng-model="person.surname" class="form-control" ng-minlength="1" required />
+        <p ng-show="registration.surname.$invalid && !registration.surname.$pristine" class="help-block">
+          Please enter your last name (surname or family name).
+        </p>
+      </div>
+    </div>
 
-  <form ng-submit="register()">
-    <p ng-show="error" class="text-danger">{{ error }}</p>
-    <input type="email" ng-model="user.email" placeholder="Email" class="form-control"><br>
-    <input type="password" ng-model="user.password" placeholder="Password" class="form-control"><br>
-    <input type="submit" value="Register" class="btn btn-primary" />
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.mobile.$invalid && !registration.mobile.$pristine }">
+        <label for="mobile">mobile number</label>
+        <input type="text" name="mobile" ng-model="person.mobile" class="form-control" ng-pattern="MobilePattern" required />
+        <p ng-show="registration.mobile.$invalid && !registration.mobile.$pristine" class="help-block">
+          Please enter your UK mobile telephone number.
+        </p>
+      </div>
+      
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.email.$invalid && !registration.email.$pristine }">
+        <label for="email">email</label>
+        <input type="email" name="email" ng-model="user.email" class="form-control" required />
+        <p ng-show="registration.email.$invalid && !registration.email.$pristine" class="help-block">
+          Please enter your email address.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.postcode.$invalid && !registration.postcode.$pristine }">
+        <label for="postcode">postcode</label>
+        <input type="text" name="postcode" ng-model="person.postcode" class="form-control" ng-pattern="PostcodePattern" to-upper required />
+        <p ng-show="registration.postcode.$invalid && !registration.postcode.$pristine" class="help-block">
+          Please enter your full UK postcode.
+        </p>
+      </div>
+
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.password.$invalid && !registration.password.$pristine }">
+        <label for="password">password</label>
+        <input type="password" name="password" ng-model="user.password" class="form-control" ng-minlength="6" required />
+        <p ng-show="registration.password.$invalid && !registration.password.$pristine" class="help-block">
+          Please choose a password with at least six characters.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <input type="submit" value="go" class="btn btn-primary" ng-disabled="registration.$invalid" />
+      </div>
+    </div>
+
   </form>
-
 </div>

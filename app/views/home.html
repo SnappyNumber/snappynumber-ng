@@ -19,7 +19,8 @@
   </span>
   <dl class="search-results" ng-show="results.length > 0">
     <dt ng-repeat-start="person in results">
-      {{person.score}} {{person.forename}} {{person.surname}}
+      {{person.forename}} {{person.surname}}
+      <!--<span style="font-weight: normal; color: gray;">{{person.score}} {{person.id}}</span>-->
     </dt>
     <dd ng-repeat-end>
       <span class="glyphicon glyphicon-earphone"></span> {{person.mobile}}

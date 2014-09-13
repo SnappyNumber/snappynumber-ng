@@ -6,6 +6,9 @@
     <a href="#" ng-click="signOut()">log out {{ user().email }}</a>
   </li>
   <li ng-hide="signedIn()">
+    <a ng-href="#/register">get listed</a>
+  </li>
+  <li ng-hide="signedIn()">
     <a ng-href="#/login">log in</a>
   </li>
 </ul>

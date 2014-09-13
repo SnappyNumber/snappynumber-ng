@@ -1,10 +1,16 @@
 'use strict';
 
+function onGoogleApiReady() {
+}
+
 app.controller('AuthCtrl',
-  function ($scope, $location, Auth) {
-    //if (Auth.signedIn()) {
-    //  $location.path('/');
-    //}
+  function ($scope, $location, Auth, Google, Person, POSTCODE_PATTERN, MOBILE_PATTERN) {
+    $scope.PostcodePattern = POSTCODE_PATTERN;
+    $scope.MobilePattern = MOBILE_PATTERN;
+
+    if (Auth.signedIn()) {
+      $location.path('/');
+    }
 
     //$scope.$on('$firebaseSimpleLogin:login', function () {
     //  $location.path('/');
@@ -20,12 +26,23 @@ app.controller('AuthCtrl',
 
     $scope.register = function () {
       Auth.register($scope.user).then(function () {
-        //user is registered
-        Auth.login($scope.user).then(function () {
-          //user is logged in
-          $location.path('/');
-        }, function (error) {
-          $scope.error = error.toString();
+        //user record is registered
+        Google.geocode($scope.person.postcode).then(function (location) {
+          //postcode is geocoded
+          $scope.person.location = {
+            latitude: location.lat,
+            longitude: location.lng
+          };
+          $scope.person.email = $scope.user.email;
+          Person.create($scope.person).then(function () {
+            //person record is created
+            Auth.login($scope.user).then(function () {
+              //user is logged in
+              $location.path('/');
+            }, function (error) {
+              $scope.error = error.toString();
+            });
+          });
         });
       }, function (error) {
         $scope.error = error.toString();

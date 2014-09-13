@@ -13,6 +13,7 @@ app.controller('HomeCtrl', function ($scope, Search, Person) {
       if (typeof results != 'undefined'){
         results.forEach(function(result) {
           Person.get(result._id).then(function(person){
+            person.id = result._id;
             person.score = result._score;
             $scope.results.push(person);
           });
