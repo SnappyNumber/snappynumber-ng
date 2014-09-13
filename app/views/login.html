@@ -1,11 +1,19 @@
-<div class="auth-forms">
 
-  <h2>Log In</h2>
-
-  <form ng-submit="login()">
-    <p ng-show="error" class="text-danger">{{ error }}</p>
-    <input type="email" ng-model="user.email" placeholder="Email" class="form-control"><br />
-    <input type="password" ng-model="user.password" placeholder="Password" class="form-control"><br />
-    <input type="submit" value="Log in" class="btn btn-primary" />
+<div class="container-fluid">
+  <form ng-submit="login()" name="login_form" novalidate>
+    <div ng-show="error" class="row">
+      <p class="text-danger">{{ error }}</p>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-6">
+        <input type="email" ng-model="user.email" placeholder="email" class="form-control" required />
+      </div>
+      <div class="col-md-5">
+        <input type="password" ng-model="user.password" placeholder="password" class="form-control" required />
+      </div>
+      <div class="col-md-1">
+        <input type="submit" value="go" class="btn btn-primary" ng-disabled="login_form.$invalid" />
+      </div>
+    </div>
   </form>
 </div>

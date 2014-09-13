@@ -1,6 +1,9 @@
 <ul class="nav nav-pills pull-right">
   <li ng-class="{active:isActive('home')}">
-    <a ng-href="#">home</a>
+    <a ng-href="#">find someone</a>
+  </li>
+  <li class="disabled" ng-class="{active:isActive('business')}">
+    <a ng-href="#" class="disabled">find something</a>
   </li>
   <li ng-class="{active:isActive('register')}" ng-hide="signedIn()">
     <a ng-href="#/register">get listed</a>

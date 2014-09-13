@@ -1,34 +1,38 @@
 
-<div class="clearfix"></div>
-
-<div class="col-lg-4">
-  <form novalidate class="simple-form">
-    <input type="search" ng-model="term" ng-change="noResults = false" placeholder="Search..." />
-    <button ng-click="search(term)">go</button>
+<div class="container-fluid">
+  <form novalidate>
+    <div class="row form-group ">
+      <div class="col-md-6">
+        <input type="search" ng-model="term" ng-change="noResults = false" class="form-control" placeholder="who..." />
+      </div>
+      <div class="col-md-5">
+        <input type="search" ng-model="where" ng-change="noResults = false" class="form-control" placeholder="where..." />
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-primary" ng-click="search(term)">go</button>
+      </div>
+    </div>
   </form>
-</div>
-
-<div class="clearfix"></div>
-
-<div>
-  <span ng-hide="!searching">
-    <i class="fa fa-spinner fa-spin"></i>
-  </span>
-  <span ng-show="noResults">
-    no results found for search term '{{term}}'
-  </span>
-  <dl class="search-results" ng-show="results.length > 0">
-    <dt ng-repeat-start="person in results">
-      {{person.forename}} {{person.surname}}
-      <!--<span style="font-weight: normal; color: gray;">{{person.score}} {{person.id}}</span>-->
-    </dt>
-    <dd ng-repeat-end>
-      <span class="glyphicon glyphicon-earphone"></span> {{person.mobile}}
-      <span class="glyphicon glyphicon-inbox"></span>
-      <a href="mailto:{{currentMarker.person.email}}">{{person.email}}</a>,
-      {{person.postcode | postalTown}}, {{person.postcode | postcodePartial}}
-    </dd>
-  </dl>
+  <div class="row">
+    <span ng-hide="!searching">
+      <i class="fa fa-spinner fa-spin"></i>
+    </span>
+    <span ng-show="noResults">
+      no results found for search term '{{term}}'
+    </span>
+    <dl class="search-results" ng-show="results.length > 0">
+      <dt ng-repeat-start="person in results">
+        {{person.forename}} {{person.surname}}
+        <!--<span style="font-weight: normal; color: gray;">{{person.score}} {{person.id}}</span>-->
+      </dt>
+      <dd ng-repeat-end>
+        <span class="glyphicon glyphicon-earphone"></span> {{person.mobile}}
+        <span class="glyphicon glyphicon-inbox"></span>
+        <a href="mailto:{{currentMarker.person.email}}">{{person.email}}</a>,
+        {{person.postcode | postalTown}}, {{person.postcode | postcodePartial}}
+      </dd>
+    </dl>
+  </div>
 </div>
 
 <div class="clearfix"></div>
