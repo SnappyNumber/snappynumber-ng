@@ -1,14 +1,14 @@
 <ul class="nav nav-pills pull-right">
-  <li class="active">
-    <a ng-href="#">Home</a>
+  <li ng-class="{active:isActive('home')}">
+    <a ng-href="#">home</a>
+  </li>
+  <li ng-class="{active:isActive('register')}" ng-hide="signedIn()">
+    <a ng-href="#/register">get listed</a>
+  </li>
+  <li ng-class="{active:isActive('login')}" ng-hide="signedIn()">
+    <a ng-href="#/login">log in</a>
   </li>
   <li ng-show="signedIn()">
     <a href="#" ng-click="signOut()">log out {{ user().email }}</a>
-  </li>
-  <li ng-hide="signedIn()">
-    <a ng-href="#/register">get listed</a>
-  </li>
-  <li ng-hide="signedIn()">
-    <a ng-href="#/login">log in</a>
   </li>
 </ul>
