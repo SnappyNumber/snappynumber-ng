@@ -19,7 +19,8 @@ var app = angular
     'ngSanitize',
     'ngTouch',
     'ngStorage',
-    'firebase'
+    'firebase',
+    'placesAutocomplete'
   ]);
 
 app.constant('FIREBASE_URL', 'https://snappynumber.firebaseio.com/');

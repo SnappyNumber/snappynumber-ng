@@ -24,4 +24,9 @@ app.controller('HomeCtrl', function ($scope, Search, Person) {
       $scope.searching = false;
     });
   };
+  $scope.place = {
+    options: { country: 'gb', types: ['(cities)', 'locality'] },
+    name: '',
+    data: {}
+  };
 });

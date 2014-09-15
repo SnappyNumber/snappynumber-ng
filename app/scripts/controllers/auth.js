@@ -30,8 +30,8 @@ app.controller('AuthCtrl',
         Google.geocode($scope.person.postcode).then(function (location) {
           //postcode is geocoded
           $scope.person.location = {
-            latitude: location.lat,
-            longitude: location.lng
+            lat: location.lat,
+            lon: location.lng
           };
           $scope.person.email = $scope.user.email;
           Person.create($scope.person).then(function () {
