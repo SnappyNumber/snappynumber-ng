@@ -33,31 +33,13 @@ angular
       details: '=?'
     },
     link: function(scope, element, attrs, controller) {
-      var opts;
       var watchEnter = false;
       var initOpts = function() {
-        opts = {};
         if (scope.options) {
-          if (scope.options.watchEnter !== true) {
-            watchEnter = false;
-          } else {
-            watchEnter = true;
-          }
+          watchEnter = !(scope.options.watchEnter !== true);
           scope.gPlace.setTypes([]);
-          if (scope.options.bounds) {
-            opts.bounds = scope.options.bounds;
-            scope.gPlace.setBounds(opts.bounds);
-          } else {
-            scope.gPlace.setBounds(null);
-          }
-          if (scope.options.country) {
-            opts.componentRestrictions = {
-              country: scope.options.country
-            };
-            scope.gPlace.setComponentRestrictions(opts.componentRestrictions);
-          } else {
-            scope.gPlace.setComponentRestrictions(null);
-          }
+          scope.gPlace.setBounds((scope.options.bounds) ? scope.options.bounds : null);
+          scope.gPlace.setComponentRestrictions((scope.options.country) ? { country: scope.options.country } : null);
         }
       }
       if (scope.gPlace == undefined) {

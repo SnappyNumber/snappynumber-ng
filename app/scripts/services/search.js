@@ -3,50 +3,51 @@
 app.factory('Search',
   function ($firebase, FIREBASE_URL, $q) {
     var searchRef = new Firebase(FIREBASE_URL + 'search');
-    var requestRef = searchRef.child("request");
-    var responseRef = searchRef.child("response");
+    var requestRef = searchRef.child('request');
+    var responseRef = searchRef.child('response');
     var Search = {
       query: function (term, geometry) {
-        var nameQuery = {
-          fuzzy_like_this:{
-            fields: ["forename", "surname"],
+        var fuzzyQuery = {
+          fuzzy_like_this: {
+            fields: ['forename', 'surname'],
             like_text: term
           }
         };
         var request = {};
         if (typeof geometry !== 'undefined') {
           if (typeof geometry.viewport !== 'undefined') {
-            var ne = geometry.viewport.getNorthEast();
-            var sw = geometry.viewport.getSouthWest();
-            request = {
-              filtered : {
-                query : nameQuery,
-                filter: {
-                  geo_bounding_box : {
-                    location : {
-                      top_left : {
-                        lat : ne.lat(),
-                        lon : sw.lng()
-                      },
-                      bottom_right : {
-                        lat : sw.lat(),
-                        lon : ne.lng()
-                      }
+            var northEast = geometry.viewport.getNorthEast(),
+                southWest = geometry.viewport.getSouthWest(),
+                box = {
+                  location: {
+                    top_left: {
+                      lat: northEast.lat(),
+                      lon: southWest.lng()
+                    },
+                    bottom_right: {
+                      lat: southWest.lat(),
+                      lon: northEast.lng()
                     }
                   }
+                };
+            request = {
+              filtered: {
+                query: fuzzyQuery,
+                filter: {
+                  geo_bounding_box : box
                 }
               }
             };
           } else {
             request = {
-              filtered : {
-                query : nameQuery,
-                filter : {
-                  geo_distance : {
-                    distance : '12km',
-                    location : {
-                      lat : geometry.location.lat(),
-                      lon : geometry.location.lng()
+              filtered: {
+                query: fuzzyQuery,
+                filter: {
+                  geo_distance: {
+                    distance: '12km',
+                    location: {
+                      lat: geometry.location.lat(),
+                      lon: geometry.location.lng()
                     }
                   }
                 }
@@ -57,7 +58,7 @@ app.factory('Search',
           request = {
             index: 'sn-persons',
             type: 'person',
-            query: nameQuery
+            query: fuzzyQuery
           };
         }
         return requestRef.push(request).name();
