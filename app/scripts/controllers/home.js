@@ -4,11 +4,11 @@ app.controller('HomeCtrl', function ($scope, Search, Person) {
   $scope.searching = false;
   $scope.noResults = false;
   $scope.results = [];
-  $scope.search = function(term) {
+  $scope.search = function(term, geometry) {
     $scope.results = [];
     $scope.searching = true;
     $scope.noResults = false;
-    var queryId = Search.query(term);
+    var queryId = Search.query(term, geometry);
     Search.results(queryId).then(function(results) {
       if (typeof results != 'undefined'){
         results.forEach(function(result) {
@@ -25,7 +25,7 @@ app.controller('HomeCtrl', function ($scope, Search, Person) {
     });
   };
   $scope.place = {
-    options: { country: 'gb', types: ['(cities)', 'locality'] },
+    options: { country: 'gb' },
     name: '',
     data: {}
   };

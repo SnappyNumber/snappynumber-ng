@@ -43,13 +43,7 @@ angular
           } else {
             watchEnter = true;
           }
-          if (scope.options.types) {
-            opts.types = [];
-            opts.types.push(scope.options.types);
-            scope.gPlace.setTypes(opts.types);
-          } else {
-            scope.gPlace.setTypes([])
-          }
+          scope.gPlace.setTypes([]);
           if (scope.options.bounds) {
             opts.bounds = scope.options.bounds;
             scope.gPlace.setBounds(opts.bounds);

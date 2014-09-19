@@ -6,53 +6,60 @@ app.factory('Search',
     var requestRef = searchRef.child("request");
     var responseRef = searchRef.child("response");
     var Search = {
-      query: function (term, location) {
-        var request = (typeof location === 'undefined')
-          ? {
-              index: 'sn-persons',
-              type: 'person',
-              query: {
-                fuzzy_like_this:{
-                  fields: ["forename", "surname"],
-                  like_text: term
+      query: function (term, geometry) {
+        var nameQuery = {
+          fuzzy_like_this:{
+            fields: ["forename", "surname"],
+            like_text: term
+          }
+        };
+        var request = {};
+        if (typeof geometry !== 'undefined') {
+          if (typeof geometry.viewport !== 'undefined') {
+            var ne = geometry.viewport.getNorthEast();
+            var sw = geometry.viewport.getSouthWest();
+            request = {
+              filtered : {
+                query : nameQuery,
+                filter: {
+                  geo_bounding_box : {
+                    location : {
+                      top_left : {
+                        lat : ne.lat(),
+                        lon : sw.lng()
+                      },
+                      bottom_right : {
+                        lat : sw.lat(),
+                        lon : ne.lng()
+                      }
+                    }
+                  }
                 }
               }
-            }
-          : {
+            };
+          } else {
+            request = {
               filtered : {
-                  query : {
-                      fuzzy_like_this:{
-                        fields: ["forename", "surname"],
-                        like_text: term
-                      }
-                  },
-                  filter: {
-                    geo_bounding_box : {
-                      pin.location : {
-                        top_left : {
-                          lat : 40.73,
-                          lon : -74.1
-                        },
-                        bottom_right : {
-                          lat : 40.717,
-                          lon : -73.99
-                        }
-                      }
+                query : nameQuery,
+                filter : {
+                  geo_distance : {
+                    distance : '12km',
+                    location : {
+                      lat : geometry.location.lat(),
+                      lon : geometry.location.lng()
                     }
                   }
-                  /*
-                  filter : {
-                    geo_distance : {
-                      distance : '12km',
-                      pin.location : {
-                        lat : location.lat,
-                        lon : location.lon
-                      }
-                    }
-                  }
-                  */
+                }
               }
+            };
+          }
+        } else {
+          request = {
+            index: 'sn-persons',
+            type: 'person',
+            query: nameQuery
           };
+        }
         return requestRef.push(request).name();
       },
       results: function (requestId) {
