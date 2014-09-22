@@ -3,27 +3,33 @@
 app.controller('PersonsCtrl', function ($scope, Person, Google) {
   $scope.persons = Person.all;
   $scope.person = {
-    title: '',
     forename: '',
     surname: '',
     email: '',
     mobile: '',
-    postcode: ''
+    postcode: '',
+    location: {
+      lat: 0,
+      lon: 0
+    }
   };
   $scope.submitPerson = function () {
     Google.geocode($scope.person.postcode).then(function (location) {
       $scope.person.location = {
-        latitude: location.lat,
-        longitude: location.lng
+        lat: location.lat,
+        lon: location.lng
       };
       Person.create($scope.person).then(function () {
         $scope.person = {
-          title: '',
           forename: '',
           surname: '',
           email: '',
           mobile: '',
-          postcode: ''
+          postcode: '',
+          location: {
+            lat: 0,
+            lon: 0
+          }
         };
       });
     });

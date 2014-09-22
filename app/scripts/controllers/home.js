@@ -4,6 +4,15 @@ app.controller('HomeCtrl', function ($scope, Search, Person) {
   $scope.searching = false;
   $scope.noResults = false;
   $scope.results = [];
+  $scope.whereChanged = function(){
+    if($scope.where === ''){
+      $scope.place = {
+        options: { country: 'gb' },
+        name: '',
+        data: {}
+      };
+    }
+  }
   $scope.search = function(term, geometry) {
     $scope.results = [];
     $scope.searching = true;
