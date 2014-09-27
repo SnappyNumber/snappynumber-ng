@@ -31,23 +31,31 @@ app.factory('Search',
                   }
                 };
             request = {
-              filtered: {
-                query: fuzzyQuery,
-                filter: {
-                  geo_bounding_box : box
+              index: 'sn-persons',
+              type: 'person',
+              query: {
+                filtered: {
+                  query: fuzzyQuery,
+                  filter: {
+                    geo_bounding_box : box
+                  }
                 }
               }
             };
           } else {
             request = {
-              filtered: {
-                query: fuzzyQuery,
-                filter: {
-                  geo_distance: {
-                    distance: '12km',
-                    location: {
-                      lat: geometry.location.lat(),
-                      lon: geometry.location.lng()
+              index: 'sn-persons',
+              type: 'person',
+              query: {
+                filtered: {
+                  query: fuzzyQuery,
+                  filter: {
+                    geo_distance: {
+                      distance: '12km',
+                      location: {
+                        lat: geometry.location.lat(),
+                        lon: geometry.location.lng()
+                      }
                     }
                   }
                 }
