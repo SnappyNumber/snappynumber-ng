@@ -6,7 +6,7 @@
         <input type="search" ng-model="term" ng-change="noResults = false" class="form-control" placeholder="who..." />
       </div>
       <div class="col-md-5">
-        <input type="search" ng-model="where" ng-change="whereChanged" class="form-control" placeholder="where..." places-autocomplete="place.name" details="place.data" options="place.options" />
+        <input type="search" ng-model="where" ng-change="whereChanged()" class="form-control" placeholder="where..." places-autocomplete="place.name" details="place.data" options="place.options" />
       </div>
       <div class="col-md-1">
         <button type="button" class="btn btn-primary" ng-click="search(term, place.data.geometry)">go</button>
