@@ -14,29 +14,28 @@
     </div>
   </form>
   <div class="row">
-    <div class="col-md-6">
-      <span ng-hide="!searching">
-        <i class="fa fa-spinner fa-spin"></i>
-      </span>
-      <span ng-show="noResults">
-        no results found for search term '{{term}}'
-      </span>
-      <dl class="search-results" ng-show="results.length > 0">
-        <dt ng-repeat-start="person in results">
-          {{person.forename}} {{person.surname}}
-          <!--<span style="font-weight: normal; color: gray;">{{person.score}} {{person.id}}</span>-->
-        </dt>
-        <dd ng-repeat-end>
+    <span ng-hide="!searching">
+      <i class="fa fa-spinner fa-spin"></i>
+    </span>
+    <span ng-show="noResults">
+      no results found for search term '{{term}}'
+    </span>
+    <dl class="search-results" ng-show="results.length > 0">
+      <dt ng-repeat-start="person in results">
+        {{person.forename}} {{person.surname}}
+        <!--<span style="font-weight: normal; color: gray;">{{person.score}} {{person.id}}</span>-->
+      </dt>
+      <dd ng-repeat-end>
+        <span ng-show="person.mobile">
           <span class="glyphicon glyphicon-earphone"></span> {{person.mobile}}
+        </span>
+        <span ng-show="person.email">
           <span class="glyphicon glyphicon-inbox"></span>
-          <a href="mailto:{{currentMarker.person.email}}">{{person.email}}</a>,
-          {{person.postcode | postalTown}}, {{person.postcode | postcodePartial}}
-        </dd>
-      </dl>
-    </div>
-    <div class="col-md-6">
-      <pre>{{place.data.geometry | json}}</pre>
-    </div>
+          <a href="mailto:{{currentMarker.person.email}}">{{person.email}}</a>
+        </span>,
+        {{person.postcode | postalTown}}, {{person.postcode | postcodePartial}}
+      </dd>
+    </dl>
   </div>
 </div>
 
