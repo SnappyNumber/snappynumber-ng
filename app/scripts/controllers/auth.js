@@ -25,8 +25,14 @@ app.controller('AuthCtrl',
     };
 
     $scope.register = function () {
-      Auth.register($scope.user).then(function () {
+      Auth.register($scope.user).then(function (user) {
         //user record is registered
+        $scope.person.profile = {
+          uid: user.uid,
+          created: {
+            timestamp: Firebase.ServerValue.TIMESTAMP
+          }
+        };
         Google.geocode($scope.person.postcode).then(function (location) {
           //postcode is geocoded
           $scope.person.location = {

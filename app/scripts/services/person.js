@@ -4,7 +4,6 @@ app.factory('Person',
   function ($firebase, FIREBASE_URL, $q) {
     var ref = new Firebase(FIREBASE_URL + 'persons');
     var sync = $firebase(ref);
-    //var persons = $firebase(ref).$asArray();
     var Person = {
       create: function (person) {
         var deferred = $q.defer();
@@ -12,7 +11,6 @@ app.factory('Person',
           deferred.resolve(createRef.name());
         });
         return deferred.promise;
-        //return persons.$add(person);
       },
       get: function (id) {
         var deferred = $q.defer();
