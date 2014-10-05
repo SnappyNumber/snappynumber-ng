@@ -1,9 +1,13 @@
 <div class="container-fluid">
-  <form ng-submit="register()" name="registration" novalidate>
+  <form stripe-form="register" name="registration" novalidate>
     <div class="row">
-      <p ng-show="error" class="text-danger">
-        {{ error }}
-      </p>
+      <ul ng-show="error" class="text-danger">
+        <li ng-repeat="e in error">{{ e }}</li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <h4>listing</h4>
     </div>
 
     <div class="row">
@@ -62,12 +66,64 @@
       </div>
     </div>
 
+    <div class="row">
+      <h4>payment</h4>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="number">card number</label>
+        <input type="text"
+               name="number"
+               ng-model="number"
+               class="form-control"
+               placeholder="4242 4242 4242 4242"
+               payments-format="card"
+               payments-validate="card" />
+        <p ng-show="registration.card.$invalid && !registration.card.$pristine" class="help-block">
+          Please enter a valid card number.
+        </p>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="expiry">expiry</label>
+        <input type="text"
+               name="expiry"
+               ng-model="expiry"
+               class="form-control"
+               placeholder="mm / yy"
+               payments-format="expiry"
+               payments-validate="expiry" />
+        <p ng-show="registration.expiry.$invalid && !registration.expiry.$pristine" class="help-block">
+          Please enter a valid expiry date.
+        </p>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="cvc">cvc</label>
+        <input type="text"
+               name="cvc"
+               ng-model="cvc"
+               class="form-control"
+               placeholder="123"
+               payments-format="cvc"
+               payments-validate="cvc" />
+        <p ng-show="registration.cvc.$invalid && !registration.cvc.$pristine" class="help-block">
+          Please enter a valid cvc number.
+        </p>
+      </div>
+    </div>
 
     <div class="row">
       <div class="form-group col-md-12">
         <input type="submit" value="go" class="btn btn-primary pull-right" ng-disabled="registration.$invalid" />
       </div>
     </div>
-
+    <input type="hidden" name="address_zip" ng-model="address_zip" ng-value="person.postcode" />
+    <input type="hidden" name="address_country" ng-model="address_country" value="GB" />
+    <input type="hidden" name="country" ng-model="country" value="GB" />
+    <input type="hidden" name="name" ng-model="name" value="{{person.forename}} {{person.surname}}" />
   </form>
+
 </div>
