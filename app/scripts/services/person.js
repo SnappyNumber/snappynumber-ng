@@ -7,8 +7,11 @@ app.factory('Person',
     var Person = {
       create: function (person) {
         var deferred = $q.defer();
-        sync.$push(person).then(function(createRef) {
-          deferred.resolve(createRef.name());
+        sync.$push(person).then(function(personRef) {
+          deferred.resolve(personRef.name());
+          //personRef.setPriority(Firebase.ServerValue.TIMESTAMP, function(){
+          //  deferred.resolve(personRef.name());
+          //});
         });
         return deferred.promise;
       },

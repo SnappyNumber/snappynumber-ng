@@ -113,11 +113,36 @@
     </div>
 
     <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.addressLine1.$invalid && !registration.addressLine1.$pristine }">
+        <label for="addressLine1">address line 1</label>
+        <input type="text" name="addressLine1" ng-model="addressLine1" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.addressLine2.$invalid && !registration.addressLine2.$pristine }">
+        <label for="addressLine2">address line 2</label>
+        <input type="text" name="addressLine2" ng-model="addressLine2" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4" ng-class="{ 'has-error' : registration.addressCity.$invalid && !registration.addressCity.$pristine }">
+        <label for="addressCity">town / city</label>
+        <input type="text" name="addressCity" ng-model="addressCity" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+      <div class="form-group col-md-4" ng-class="{ 'has-error' : registration.addressState.$invalid && !registration.addressState.$pristine }">
+        <label for="addressState">county</label>
+        <input type="text" name="addressState" ng-model="addressState" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+      <div class="form-group col-md-4" ng-class="{ 'has-error' : registration.addressCountry.$invalid && !registration.addressCountry.$pristine }">
+        <label for="addressCountry">country</label>
+        <select name="addressCountry" ng-model="addressCountry" class="form-control" ng-disabled="registration.addressZip.$invalid" ng-options="country.code as country.name for country in countries"></select>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="form-group col-md-12">
         <input type="submit" value="go" class="btn btn-primary pull-right" ng-disabled="registration.$invalid" />
       </div>
     </div>
-    <input type="hidden" name="addressCountry" ng-model="addressCountry" value="GB" />
   </form>
 
 </div>

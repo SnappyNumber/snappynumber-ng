@@ -1,3 +1,5 @@
+/*
+'use strict';
 
 var paymentsModule = angular.module('angularPayments', []);
 
@@ -718,15 +720,14 @@ paymentsModule.directive('stripeForm', ['$window', '$parse', 'Common', function(
   // filter valid stripe-values from scope and convert them from camelCase to snake_case
   _getDataToSend = function(data){
 
-    var possibleKeys = ['number', 'expMonth', 'expYear',
-                    'cvc', 'name','addressLine1',
-                    'addressLine2', 'addressCity',
-                    'addressState', 'addressZip',
-                    'addressCountry']
+    var possibleKeys = [
+      'number', 'expMonth', 'expYear', 'cvc', 'name',
+      'addressLine1', 'addressLine2', 'addressCity', 'addressState',
+      'addressZip', 'addressCountry']
 
-    var camelToSnake = function(str){
-      return str.replace(/([A-Z])/g, function(m){
-        return "_"+m.toLowerCase();
+    var camelToSnake = function(str) {
+      return str.replace(/([A-Z])/g, function(m) {
+        return '_' + m.toLowerCase();
       });
     }
 
@@ -768,25 +769,19 @@ paymentsModule.directive('stripeForm', ['$window', '$parse', 'Common', function(
           scope.expYear = exp.year
         }
 
-        var button = form.find('button');
-        button.prop('disabled', true);
-
         if(form.hasClass('ng-valid')) {
-
-          $window.Stripe.createToken(_getDataToSend(scope), function() {
+          var stripe = $window.Stripe;
+          stripe.card.createToken(_getDataToSend(scope), function() {
             var args = arguments;
             scope.$apply(function() {
               scope[attr.stripeForm].apply(scope, args);
             });
-            button.prop('disabled', false);
-
           });
 
         } else {
           scope.$apply(function() {
             scope[attr.stripeForm].apply(scope, [400, {error: 'Invalid form submitted.'}]);
           });
-          button.prop('disabled', false);
         }
 
         scope.expMonth = null;
@@ -796,3 +791,4 @@ paymentsModule.directive('stripeForm', ['$window', '$parse', 'Common', function(
     }
   }
 }]);
+*/
