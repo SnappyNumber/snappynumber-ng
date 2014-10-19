@@ -5,13 +5,7 @@
   <li class="disabled" ng-class="{active:isActive('business')}">
     <a ng-href="#" class="disabled">find something</a>
   </li>
-  <li ng-class="{active:isActive('register')}" ng-hide="signedIn()">
+  <li ng-class="{active:isActive('register')}">
     <a ng-href="#/register">get listed</a>
-  </li>
-  <li ng-class="{active:isActive('login')}" ng-hide="signedIn()">
-    <a ng-href="#/login">log in</a>
-  </li>
-  <li ng-show="signedIn()">
-    <a href="#" ng-click="signOut()">log out {{ user().email }}</a>
   </li>
 </ul>
