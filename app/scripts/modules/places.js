@@ -2,7 +2,7 @@
 'use strict';
 
 angular
-  .module( 'placesAutocomplete', [])
+  .module('placesAutocomplete', [])
   .directive('placesAutocomplete', function() {
   return {
     require: 'ngModel',
