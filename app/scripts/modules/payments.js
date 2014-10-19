@@ -739,10 +739,10 @@ paymentsModule.directive('stripeForm', ['$window', '$parse', 'Common', function(
     }
 
     ret['number'] = (ret['number'] || '').replace(/ /g,'');
-    ret['country'] = 'GB';
-    ret['address_country'] = 'GB';
-    ret['address_zip'] = data.person.postcode;
-    ret['name'] = data.person.forename + ' ' + data.person.surname;
+    //ret['country'] = 'GB';
+    //ret['address_country'] = 'GB';
+    //ret['address_zip'] = data.person.postcode;
+    //ret['name'] = data.person.forename + ' ' + data.person.surname;
 
     return ret;
   }
