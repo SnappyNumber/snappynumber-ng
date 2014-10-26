@@ -2,7 +2,7 @@
 
 app.factory('Person',
   function ($firebase, FIREBASE_URL, $q) {
-    var ref = new Firebase(FIREBASE_URL + 'persons');
+    var ref = new Firebase(FIREBASE_URL + 'person');
     var sync = $firebase(ref);
     var Person = {
       create: function (person) {

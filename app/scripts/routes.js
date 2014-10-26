@@ -3,10 +3,15 @@
 
 app.config(function ($routeProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: 'views/home.html',
-      controller: 'HomeCtrl',
-      activeRoute: 'home'
+    .when('/find-someone', {
+      templateUrl: 'views/someone.html',
+      controller: 'SomeoneCtrl',
+      activeRoute: 'someone'
+    })
+    .when('/find-something', {
+      templateUrl: 'views/something.html',
+      controller: 'SomethingCtrl',
+      activeRoute: 'something'
     })
     .when('/register', {
       templateUrl: 'views/register.html',
@@ -24,6 +29,6 @@ app.config(function ($routeProvider) {
       activeRoute: 'about'
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/find-someone'
     });
 });

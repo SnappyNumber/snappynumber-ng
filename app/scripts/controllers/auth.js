@@ -11,14 +11,14 @@ app.controller('AuthCtrl',
     $scope.PostcodePattern = POSTCODE_PATTERN;
     $scope.MobilePattern = MOBILE_PATTERN;
 
-    if (Auth.signedIn()) {
-      $location.path('/');
-    }
+    //if (Auth.signedIn()) {
+    //  $location.path('/');
+    //}
 
     //$scope.$on('$firebaseSimpleLogin:login', function () {
     //  $location.path('/');
     //});
-
+/*
     $scope.login = function () {
       Auth.login($scope.user).then(function () {
         $location.path('/');
@@ -30,7 +30,7 @@ app.controller('AuthCtrl',
         }
       });
     };
-
+*/
     $scope.register = function (code, result) {
 
       //handle payment
@@ -73,6 +73,8 @@ app.controller('AuthCtrl',
                   $scope.person.email = $scope.user.email;
                   Person.create($scope.person).then(function () {
                     //person record is created
+                    $location.path('/');
+                    /*
                     Auth.login($scope.user).then(function () {
                       //user is logged in
                       $location.path('/');
@@ -83,6 +85,7 @@ app.controller('AuthCtrl',
                         $scope.error = [ error.toString() ]
                       }
                     });
+                    */
                   });
                 });
               }, function (error) {

@@ -31,7 +31,7 @@ app.factory('Search',
                   }
                 };
             request = {
-              index: 'sn-persons',
+              index: 'person',
               type: 'person',
               query: {
                 filtered: {
@@ -44,7 +44,7 @@ app.factory('Search',
             };
           } else {
             request = {
-              index: 'sn-persons',
+              index: 'person',
               type: 'person',
               query: {
                 filtered: {
@@ -64,7 +64,7 @@ app.factory('Search',
           }
         } else {
           request = {
-            index: 'sn-persons',
+            index: 'persons',
             type: 'person',
             query: fuzzyQuery
           };

@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('HomeCtrl', function ($scope, Search, Person) {
+app.controller('SomeoneCtrl', function ($scope, Search, Person) {
   $scope.searching = false;
   $scope.noResults = false;
   $scope.results = [];
