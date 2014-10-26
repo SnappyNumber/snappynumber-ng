@@ -1,13 +1,13 @@
 'use strict';
 
-app.factory('Person',
+app.factory('Service',
   function ($firebase, FIREBASE_URL, $q) {
-    var ref = new Firebase(FIREBASE_URL + 'person');
+    var ref = new Firebase(FIREBASE_URL + 'service');
     var sync = $firebase(ref);
-    var Person = {
-      create: function (person) {
+    var Service = {
+      create: function (service) {
         var deferred = $q.defer();
-        sync.$push(person).then(function(newRef) {
+        sync.$push(service).then(function(newRef) {
           deferred.resolve(newRef.name());
         });
         return deferred.promise;
@@ -20,6 +20,6 @@ app.factory('Person',
         return deferred.promise;
       }
     };
-    return Person;
+    return Service;
   }
 );

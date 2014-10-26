@@ -36,7 +36,7 @@
 
       <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.email.$invalid && !registration.email.$pristine }">
         <label for="email">email</label>
-        <input type="email" name="email" ng-model="user.email" class="form-control" required />
+        <input type="email" name="email" ng-model="person.email" class="form-control" required />
         <p ng-show="registration.email.$invalid && !registration.email.$pristine" class="help-block">
           Please enter your email address.
         </p>
@@ -52,14 +52,6 @@
         </p>
         <p class="help-block">
           Your full postcode will not appear in search results. It is used to narrow search results by towns or cities.
-        </p>
-      </div>
-
-      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.password.$invalid && !registration.password.$pristine }">
-        <label for="password">password</label>
-        <input type="password" name="password" ng-model="user.password" class="form-control" ng-minlength="6" required />
-        <p ng-show="registration.password.$invalid && !registration.password.$pristine" class="help-block">
-          Please choose a password with at least six characters.
         </p>
       </div>
     </div>

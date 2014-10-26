@@ -6,10 +6,12 @@ app.factory('Search',
     var requestRef = searchRef.child('request');
     var responseRef = searchRef.child('response');
     var Search = {
-      query: function (term, geometry) {
+      query: function (term, type, geometry) {
         var fuzzyQuery = {
           fuzzy_like_this: {
-            fields: ['forename', 'surname'],
+            fields: type === 'person'
+              ? ['forename', 'surname']
+              : ['name', 'description'],
             like_text: term
           }
         };
@@ -31,8 +33,8 @@ app.factory('Search',
                   }
                 };
             request = {
-              index: 'person',
-              type: 'person',
+              index: type,
+              type: type,
               query: {
                 filtered: {
                   query: fuzzyQuery,
@@ -44,8 +46,8 @@ app.factory('Search',
             };
           } else {
             request = {
-              index: 'person',
-              type: 'person',
+              index: type,
+              type: type,
               query: {
                 filtered: {
                   query: fuzzyQuery,
@@ -64,8 +66,8 @@ app.factory('Search',
           }
         } else {
           request = {
-            index: 'persons',
-            type: 'person',
+            index: type,
+            type: type,
             query: fuzzyQuery
           };
         }

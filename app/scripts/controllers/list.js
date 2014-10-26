@@ -1,38 +1,11 @@
 'use strict';
 
-function onGoogleApiReady() {
-}
-
-app.controller('AuthCtrl',
-  function ($scope, $location, Auth, Stripe, Google, Person, POSTCODE_PATTERN, MOBILE_PATTERN) {
-    //if ($location.search().stripeToken){
-    //  $scope.stripeToken = $location.search().stripeToken;
-    //}
+app.controller('ListCtrl',
+  function ($scope, $location, $route, Stripe, Google, Person, Service, POSTCODE_PATTERN, MOBILE_PATTERN) {
     $scope.PostcodePattern = POSTCODE_PATTERN;
     $scope.MobilePattern = MOBILE_PATTERN;
 
-    //if (Auth.signedIn()) {
-    //  $location.path('/');
-    //}
-
-    //$scope.$on('$firebaseSimpleLogin:login', function () {
-    //  $location.path('/');
-    //});
-/*
-    $scope.login = function () {
-      Auth.login($scope.user).then(function () {
-        $location.path('/');
-      }, function (error) {
-        if ($scope.error) {
-          $scope.error.push(error.toString());
-        } else {
-          $scope.error = [ error.toString() ]
-        }
-      });
-    };
-*/
     $scope.register = function (code, result) {
-
       //handle payment
       $scope.processingPayment = true;
       if (result.error) {
@@ -46,7 +19,7 @@ app.controller('AuthCtrl',
               if ($scope.error) { $scope.error.push(payment.error.toString()); } else { $scope.error = [ payment.error.toString() ]; }
             } else {
               //payment succeeded
-              $scope.person.order = {
+              var order = {
                 stripe: {
                   token: result.id,
                   customerId: payment.customer.id,
@@ -55,47 +28,33 @@ app.controller('AuthCtrl',
                 },
                 timestamp: Firebase.ServerValue.TIMESTAMP
               };
-
-              Auth.register($scope.user).then(function (user) {
-                //user record is registered
-                $scope.person.profile = {
-                  uid: user.uid,
-                  created: {
-                    timestamp: Firebase.ServerValue.TIMESTAMP
-                  }
-                };
+              if ($route.current.activeRoute === 'list-someone') {
+                $scope.person.order = order;
                 Google.geocode($scope.person.postcode).then(function (location) {
                   //postcode is geocoded
                   $scope.person.location = {
                     lat: location.lat,
                     lon: location.lng
                   };
-                  $scope.person.email = $scope.user.email;
                   Person.create($scope.person).then(function () {
                     //person record is created
                     $location.path('/');
-                    /*
-                    Auth.login($scope.user).then(function () {
-                      //user is logged in
-                      $location.path('/');
-                    }, function (error) {
-                      if ($scope.error) {
-                        $scope.error.push(error.toString());
-                      } else {
-                        $scope.error = [ error.toString() ]
-                      }
-                    });
-                    */
                   });
                 });
-              }, function (error) {
-                if ($scope.error) {
-                  $scope.error.push(error.toString());
-                } else {
-                  $scope.error = [ error.toString() ]
-                }
-              });
-
+              } else if ($route.current.activeRoute === 'list-something') {
+                $scope.service.order = order;
+                Google.geocode($scope.service.postcode).then(function (location) {
+                  //postcode is geocoded
+                  $scope.service.location = {
+                    lat: location.lat,
+                    lon: location.lng
+                  };
+                  Service.create($scope.service).then(function () {
+                    //service record is created
+                    $location.path('/');
+                  });
+                });
+              }
             }
           } else {
             if ($scope.error) { $scope.error.push('Payment Failed'); } else { $scope.error = [ 'Payment Failed' ]; }

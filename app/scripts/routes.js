@@ -4,29 +4,24 @@
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/find-someone', {
-      templateUrl: 'views/someone.html',
-      controller: 'SomeoneCtrl',
-      activeRoute: 'someone'
+      templateUrl: 'views/find-someone.html',
+      controller: 'FindSomeoneCtrl',
+      activeRoute: 'find-someone'
     })
     .when('/find-something', {
-      templateUrl: 'views/something.html',
-      controller: 'SomethingCtrl',
-      activeRoute: 'something'
+      templateUrl: 'views/find-something.html',
+      controller: 'FindSomethingCtrl',
+      activeRoute: 'find-something'
     })
-    .when('/register', {
-      templateUrl: 'views/register.html',
-      controller: 'AuthCtrl',
-      activeRoute: 'register'
+    .when('/list-someone', {
+      templateUrl: 'views/list-someone.html',
+      controller: 'ListCtrl',
+      activeRoute: 'list-someone'
     })
-    .when('/login', {
-      templateUrl: 'views/login.html',
-      controller: 'AuthCtrl',
-      activeRoute: 'login'
-    })
-    .when('/about', {
-      templateUrl: 'views/about.html',
-      controller: 'AboutCtrl',
-      activeRoute: 'about'
+    .when('/list-something', {
+      templateUrl: 'views/list-something.html',
+      controller: 'ListCtrl',
+      activeRoute: 'list-something'
     })
     .otherwise({
       redirectTo: '/find-someone'

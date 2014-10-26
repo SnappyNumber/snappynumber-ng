@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('SomethingCtrl', function ($scope, Search, Person) {
+app.controller('FindSomeoneCtrl', function ($scope, Search, Person) {
   $scope.searching = false;
   $scope.noResults = false;
   $scope.results = [];
@@ -17,9 +17,9 @@ app.controller('SomethingCtrl', function ($scope, Search, Person) {
     $scope.results = [];
     $scope.searching = true;
     $scope.noResults = false;
-    var queryId = Search.query(term, geometry);
+    var queryId = Search.query(term, 'person', geometry);
     Search.results(queryId).then(function(results) {
-      if (typeof results != 'undefined'){
+      if (typeof results != 'undefined') {
         results.forEach(function(result) {
           Person.get(result._id).then(function(person){
             person.id = result._id;

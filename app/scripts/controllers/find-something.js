@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('SomeoneCtrl', function ($scope, Search, Person) {
+app.controller('FindSomethingCtrl', function ($scope, Search, Service) {
   $scope.searching = false;
   $scope.noResults = false;
   $scope.results = [];
@@ -17,14 +17,14 @@ app.controller('SomeoneCtrl', function ($scope, Search, Person) {
     $scope.results = [];
     $scope.searching = true;
     $scope.noResults = false;
-    var queryId = Search.query(term, geometry);
+    var queryId = Search.query(term, 'service', geometry);
     Search.results(queryId).then(function(results) {
-      if (typeof results != 'undefined'){
+      if (typeof results != 'undefined') {
         results.forEach(function(result) {
-          Person.get(result._id).then(function(person){
-            person.id = result._id;
-            person.score = result._score;
-            $scope.results.push(person);
+          Service.get(result._id).then(function(service){
+            service.id = result._id;
+            service.score = result._score;
+            $scope.results.push(service);
           });
         });
       } else {

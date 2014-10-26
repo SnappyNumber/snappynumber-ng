@@ -1,0 +1,140 @@
+<div class="container-fluid">
+  <form stripe-form="register" name="registration" novalidate>
+    <div class="row">
+      <ul ng-show="error" class="text-danger">
+        <li ng-repeat="e in error">{{ e }}</li>
+      </ul>
+    </div>
+
+    <h4>your service or business listing</h4>
+
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.name.$invalid && !registration.name.$pristine }">
+        <label for="name">name</label>
+        <input type="text" name="name" ng-model="service.name" class="form-control" ng-minlength="1" required />
+        <p ng-show="registration.name.$invalid && !registration.name.$pristine" class="help-block">
+          Please enter your service or business name.
+        </p>
+      </div>
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.description.$invalid && !registration.description.$pristine }">
+        <label for="description">description</label>
+        <textarea name="description" ng-model="service.description" class="form-control" ng-minlength="1" required />
+        <p ng-show="registration.description.$invalid && !registration.description.$pristine" class="help-block">
+          Please enter a short description of your service or business.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.mobile.$invalid && !registration.mobile.$pristine }">
+        <label for="mobile">mobile number</label>
+        <input type="text" name="mobile" ng-model="service.mobile" class="form-control" ng-pattern="MobilePattern" required />
+        <p ng-show="registration.mobile.$invalid && !registration.mobile.$pristine" class="help-block">
+          Please enter a UK mobile telephone number.
+        </p>
+      </div>
+
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.email.$invalid && !registration.email.$pristine }">
+        <label for="email">email</label>
+        <input type="email" name="email" ng-model="service.email" class="form-control" required />
+        <p ng-show="registration.email.$invalid && !registration.email.$pristine" class="help-block">
+          Please enter an email address.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.postcode.$invalid && !registration.postcode.$pristine }">
+        <label for="postcode">listing location</label>
+        <input type="text" name="postcode" ng-model="service.postcode" class="form-control" ng-pattern="PostcodePattern" to-upper required />
+        <p ng-show="registration.postcode.$invalid && !registration.postcode.$pristine" class="help-block">
+          Please enter a full UK postcode.
+        </p>
+        <p class="help-block">
+          This postcode will not appear in search results. It is used to narrow search results by towns or cities.
+        </p>
+      </div>
+    </div>
+
+    <h4>payment card</h4>
+
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.card.$invalid && !registration.card.$pristine }">
+        <label for="number">card number</label>
+        <input type="text" name="number" ng-model="number" class="form-control" payments-format="card" payments-validate="card" />
+        <p ng-show="registration.card.$invalid && !registration.card.$pristine" class="help-block">
+          Please enter a valid card number.
+        </p>
+      </div>
+
+      <div class="form-group col-md-3" ng-class="{ 'has-error' : registration.expiry.$invalid && !registration.expiry.$pristine }">
+        <label for="expiry">expiry</label>
+        <input type="text" name="expiry" ng-model="expiry" class="form-control" placeholder="mm / yy" payments-format="expiry" payments-validate="expiry" />
+        <p ng-show="registration.expiry.$invalid && !registration.expiry.$pristine" class="help-block">
+          Please enter a valid expiry date.
+        </p>
+      </div>
+
+      <div class="form-group col-md-3" ng-class="{ 'has-error' : registration.cvc.$invalid && !registration.cvc.$pristine }">
+        <label for="cvc">cvc</label>
+        <input type="text" name="cvc" ng-model="cvc" class="form-control" payments-format="cvc" payments-validate="cvc" />
+        <p ng-show="registration.cvc.$invalid && !registration.cvc.$pristine" class="help-block">
+          Please enter a valid cvc number.
+        </p>
+      </div>
+    </div>
+
+    <h4>billing address</h4>
+
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.name.$invalid && !registration.name.$pristine }">
+        <label for="name">name on card</label>
+        <input type="text" name="name" ng-model="name" class="form-control" ng-minlength="1" to-upper required />
+        <p ng-show="registration.name.$invalid && !registration.name.$pristine" class="help-block">
+          Please enter your name as it appears on your payment card.
+        </p>
+      </div>
+
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.addressZip.$invalid && !registration.addressZip.$pristine }">
+        <label for="addressZip">postcode</label>
+        <input type="text" name="addressZip" ng-model="addressZip" class="form-control" ng-pattern="PostcodePattern" to-upper required />
+        <p ng-show="registration.addressZip.$invalid && !registration.addressZip.$pristine" class="help-block">
+          Please enter your full UK postcode.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.addressLine1.$invalid && !registration.addressLine1.$pristine }">
+        <label for="addressLine1">address line 1</label>
+        <input type="text" name="addressLine1" ng-model="addressLine1" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+      <div class="form-group col-md-6" ng-class="{ 'has-error' : registration.addressLine2.$invalid && !registration.addressLine2.$pristine }">
+        <label for="addressLine2">address line 2</label>
+        <input type="text" name="addressLine2" ng-model="addressLine2" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4" ng-class="{ 'has-error' : registration.addressCity.$invalid && !registration.addressCity.$pristine }">
+        <label for="addressCity">town / city</label>
+        <input type="text" name="addressCity" ng-model="addressCity" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+      <div class="form-group col-md-4" ng-class="{ 'has-error' : registration.addressState.$invalid && !registration.addressState.$pristine }">
+        <label for="addressState">county</label>
+        <input type="text" name="addressState" ng-model="addressState" class="form-control" ng-disabled="registration.addressZip.$invalid" />
+      </div>
+      <div class="form-group col-md-4" ng-class="{ 'has-error' : registration.addressCountry.$invalid && !registration.addressCountry.$pristine }">
+        <label for="addressCountry">country</label>
+        <select name="addressCountry" ng-model="addressCountry" class="form-control" ng-disabled="registration.addressZip.$invalid" ng-options="country.code as country.name for country in countries"></select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <input type="submit" value="go" class="btn btn-primary pull-right" ng-disabled="registration.$invalid" />
+      </div>
+    </div>
+  </form>
+
+</div>
